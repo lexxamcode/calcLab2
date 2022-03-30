@@ -58,9 +58,10 @@ def qr_decomposition(matrix: np.ndarray):
         np.dot(np.dot(e3, a3), e3)
     a4 = np.dot(np.dot(e1, a4), e1) + np.dot(np.dot(e2, a4), e2) + \
         np.dot(np.dot(e3, a4), e3) + np.dot(np.dot(e4, a4), e4)
-    a5 = np.dot(np.dot(e1, a5), e1) + np.dot(np.dot(e2, a5), e2) + np.dot(np.dot(e3, a5), e3) + \
+    a5 = np.dot(np.dot(e1, a5), e1) + np.dot(np.dot(e2, a5), e2) + np.dot(np.dot(e3, a5), e3) +\
         np.dot(np.dot(e4, a5), e4) + np.dot(np.dot(e5, a5), e5)
-
+    a6 = np.dot(np.dot(e1, a6), e1) + np.dot(np.dot(e2, a6), e2) + np.dot(np.dot(e3, a6), e3) + \
+        np.dot(np.dot(e4, a6), e4) + np.dot(np.dot(e5, a6), e5) + np.dot(np.dot(e6, a6), e6)
     # A = QR
     # Q = [e1, e2, e3, e4, e5]
 
