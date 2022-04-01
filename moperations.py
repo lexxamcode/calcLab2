@@ -1,11 +1,67 @@
 # library that contains matrix
 # operations required for the
 # lab.
-
 import numpy as np
 
 
+def find_abs_max(vector: np.array):
+    max_element = vector[0]
+    for i in range(vector.shape[0]):
+        if abs(vector[i]) > max_element:
+            max_element = vector[i]
+
+    return abs(max_element)
+
+
+def simple_iteration_method(matrix: np.ndarray):
+    # Check
+    correct = True
+    print(matrix.shape[0])
+    for i in range(matrix.shape[0]):
+        sum_others = 0
+        for j in range(matrix.shape[0]):
+            if i != j:
+                sum_others = sum_others + abs(matrix[i, j])
+        if abs(matrix[i, i]) <= sum_others:
+            correct = False
+
+    if correct:
+        print('\nCorrect system\n')
+    else:
+        print('\nIncorrect system\n')
+        return
+
+    # Jacobi method: X = CX + F
+    x_vector = np.zeros(matrix.shape[0])
+    f_vector = np.zeros(matrix.shape[0])
+    # e_matrix = np.eye(matrix.shape[0] - 1)
+    eps = 0.001
+
+    # Creating C matrix:
+    c_matrix = np.zeros((matrix.shape[0], matrix.shape[0]), dtype='float64')
+    for i in range(c_matrix.shape[0]):
+        for j in range(c_matrix.shape[0]):
+            if i != j:
+                c_matrix[i, j] = -(matrix[i, j]/matrix[i, i])
+
+    for i in range(c_matrix.shape[0]):
+        f_vector[i] = matrix[i, matrix.shape[1] - 1]/matrix[i, i]
+    print(f_vector)
+    print(c_matrix)
+    print(x_vector)
+
+    while True:
+        temp_vector = x_vector
+        x_vector = mul(c_matrix, x_vector.transpose()) + f_vector
+        print(x_vector)
+        if abs(find_abs_max(x_vector) - find_abs_max(temp_vector)) < eps:
+            break
+    print(x_vector)
+    return x_vector
+
+
 def det(matrix: np.ndarray):
+    # Matrix' determinant
     return np.linalg.det(matrix)
 
 
@@ -18,6 +74,7 @@ def proj(u: np.ndarray, a: np.ndarray):
 
 
 def norm(vector: np.ndarray):
+    # Norm of the vector
     return np.linalg.norm(vector)
 
 
@@ -63,7 +120,7 @@ def qr_decomposition(matrix: np.ndarray):
     a6 = np.dot(np.dot(e1, a6), e1) + np.dot(np.dot(e2, a6), e2) + np.dot(np.dot(e3, a6), e3) + \
         np.dot(np.dot(e4, a6), e4) + np.dot(np.dot(e5, a6), e5) + np.dot(np.dot(e6, a6), e6)
     # A = QR
-    # Q = [e1, e2, e3, e4, e5]
+    # Q = [e1, e2, e3, e4, e5, e6]
 
     q_matrix = np.array([e1, e2, e3, e4, e5, e6])
     q_matrix = q_matrix.transpose()
