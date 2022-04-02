@@ -3,7 +3,22 @@ import numpy as np
 
 
 def first_part():
-    pass
+    # First task
+    matrix = np.random.randint(-3, 3, (10, 10))
+    print(f'Random 10x10 matrix:\n{matrix}')
+    minor = matrix[1:5, 6:10]
+    print(f'Minor of the 4th order:\n{minor}')
+
+    # Second task
+    f_matrix = np.random.sample((4, 4)) + 2
+    s_matrix = np.random.sample((4, 4)) + 2
+    print(f'First matrix:\n{f_matrix}')
+    print(f'Second matrix:\n{s_matrix}')
+    print(f'Vector multiply:\n{m.vector_mul(f_matrix, s_matrix)}')
+    print(f'Matrix multiply:\n{m.matrix_algorithm(f_matrix, s_matrix)}')
+    print(f'numpy.dot:\n{np.dot(f_matrix, s_matrix)}')
+
+    #Third task
 
 
 def second_part():
@@ -35,4 +50,5 @@ def second_part():
 
 
 if __name__ == '__main__':
-    second_part()
+    # second_part()
+    first_part()

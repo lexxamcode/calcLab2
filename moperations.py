@@ -4,6 +4,30 @@
 import numpy as np
 
 
+def matrix_algorithm(a: np.ndarray, b: np.ndarray):
+    result = np.zeros((a.shape[0], b.shape[1]), dtype=float)
+    if a.shape[1] != b.shape[0]:
+        print('arguments have a different shape')
+        return
+    else:
+        for i in range(a.shape[0]):
+            result[:, i] = mul(a, b[:,i])
+    return result
+
+
+def vector_mul(a: np.ndarray, b: np.ndarray):
+    result = np.zeros((a.shape[0], b.shape[1]), dtype=float)
+    if a.shape[1] != b.shape[0]:
+        print('arguments have a different shape')
+        return
+    else:
+        for i in range(a.shape[0]):
+            for j in range(b.shape[1]):
+                result[i, j] = np.dot(a[i, :], b[:, j])
+
+    return result
+
+
 def find_abs_max(vector: np.array):
     max_element = vector[0]
     for i in range(vector.shape[0]):
