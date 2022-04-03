@@ -18,7 +18,20 @@ def first_part():
     print(f'Matrix multiply:\n{m.matrix_algorithm(f_matrix, s_matrix)}')
     print(f'numpy.dot:\n{np.dot(f_matrix, s_matrix)}')
 
-    #Third task
+    # Third task
+    # triangle_matrix = np.random.randint(1., 11., (5, 5))
+    triangle_matrix = np.random.randint(-101, 101, (5, 5))
+    triangle_matrix = triangle_matrix.astype('float64')
+    triangle_matrix = np.triu(triangle_matrix)
+    print('Upper triangular matrix system solution:\n')
+    print('A:')
+    print(triangle_matrix)
+
+    b_vector = np.random.randint(-101, 101, (5, 1))
+    b_vector = b_vector.astype('float64')
+    print('B:')
+    print(b_vector)
+    print(f'Solution:\n{m.tri_solve(triangle_matrix, b_vector)}')
 
 
 def second_part():

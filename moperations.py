@@ -4,6 +4,24 @@
 import numpy as np
 
 
+def tri_solve(triu_matrix: np.ndarray, b: np.ndarray):
+    # AX = B, where A - upper triangle matrix
+    x = np.zeros(triu_matrix.shape[0], dtype=float)
+    x[triu_matrix.shape[0] - 1] = b[triu_matrix.shape[0] - 1]
+
+    for i in range(triu_matrix.shape[0]):
+        b[i] = b[i] / triu_matrix[i, i]
+        triu_matrix[i, :] = triu_matrix[i, :]/triu_matrix[i, i]
+
+    for i in range(triu_matrix.shape[0] - 1, -1, -1):
+        x[i] = b[i]
+
+        for j in range(i+1, triu_matrix.shape[1]):
+            koef = triu_matrix[i, j]
+            x[i] -= koef*x[j]
+    return x
+
+
 def matrix_algorithm(a: np.ndarray, b: np.ndarray):
     result = np.zeros((a.shape[0], b.shape[1]), dtype=float)
     if a.shape[1] != b.shape[0]:
@@ -11,7 +29,7 @@ def matrix_algorithm(a: np.ndarray, b: np.ndarray):
         return
     else:
         for i in range(a.shape[0]):
-            result[:, i] = mul(a, b[:,i])
+            result[:, i] = mul(a, b[:, i])
     return result
 
 
