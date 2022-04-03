@@ -58,7 +58,6 @@ def find_abs_max(vector: np.array):
 def simple_iteration_method(matrix: np.ndarray):
     # Check
     correct = True
-    print(matrix.shape[0])
     for i in range(matrix.shape[0]):
         sum_others = 0
         for j in range(matrix.shape[0]):
@@ -224,5 +223,32 @@ def lu_decomposition(matrix: np.ndarray):
                 l_matrix[i, j] = (
                     matrix[i, j] - np.dot(l_matrix[i, :j], u_matrix[:j, j])) / u_matrix[j, j]
 
-    lu = (u_matrix, l_matrix)
+    lu = (l_matrix, u_matrix)
     return lu
+
+
+def tri_solve_l(matrix: np.ndarray, b: np.ndarray):
+    x = np.zeros((matrix.shape[0], 1), float)
+    x[0] = b[0]
+
+    for i in range(1, matrix.shape[0]):
+        x[i] = b[i] - np.dot(matrix[i, :i], x[:i])
+    return x
+
+
+def lu_system_solve(matrix: np.ndarray, b: np.ndarray):
+    if (matrix[0, 0] == 0) or (np.linalg.det(matrix[0:1, 0:1]) == 0) or (np.linalg.det(matrix[0:2, 0:2]) == 0) or \
+       (np.linalg.det(matrix[0:3, 0:3]) == 0):
+        print('Can\'t solve the system')
+        return
+    else:
+        # AX = B
+        # LUX = B
+        # Ly = B; y = L^-1 B
+        # y = UX; X = U^-1 y
+        l_matrix = lu_decomposition(matrix)[0]
+        u_matrix = lu_decomposition(matrix)[1]
+        y = tri_solve_l(l_matrix, b)
+        x = tri_solve(u_matrix, y)
+        print(f'LU-decomposition:\nL:\n{l_matrix}\nU:\n{u_matrix}\ny:\n{y}')
+        return x
