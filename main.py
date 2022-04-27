@@ -10,6 +10,7 @@ def first_part():
     print(f'Random 10x10 matrix:\n{matrix}')
     minor = matrix[1:5, 6:10]
     print(f'Minor of the 4th order:\n{minor}')
+    print(f'Det of the minor is {np.linalg.det(minor)}')
 
     # Second task
     print('Second Task\n')
@@ -73,9 +74,9 @@ def second_part():
 
     # Third task
     print('Third task')
-    equation_system = np.array([[3.3, 2.1, 2.8, 0.8],
-                                [4.1, 3.7, 4.8, 5.7],
-                                [2.7, 1.8, 1.1, 3.2]])
+    equation_system = np.array([[3.0, 0.65, -1.88, 1.24],
+                                [1.34, 4.0, 2.54, 2.35],
+                                [0.86, -1.73, -12.0, 3.15]])
     solution = m.simple_iteration_method(equation_system)
     print(f'solution of linear algebraic system: {solution}')
 
