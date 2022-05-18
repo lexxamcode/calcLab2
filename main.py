@@ -78,22 +78,22 @@ def second_part():
                                 [4.1, 11.2, 4.8, 5.7],
                                 [2.7, 1.8, 5.1, 3.2]])
     solution = m.simple_iteration_method(equation_system)
-    print(f'solution of linear algebraic system: {solution}')
+    print(f'solution of linear algebraic system: {solution}\n')
 
 
 def third_part():
     matrix = np.random.randint(-11, 11, (6, 6))
-    print(f'\nThird Part\n{matrix}\n--Q--\n')
-    print(f'{m.householder_qr(matrix)[0]}\n')
-    print(f'{m.gram_schmidt_qr(matrix)[0]}\n')
-    print(f'{m.givens_qr(matrix)[0]}\n')
-    print(f'{np.linalg.qr(matrix)[0]}\n')
+    # print(f'\nThird Part\n{matrix}\n--Q--\n')
+    #print(f'{m.householder_qr(matrix)[0]}\n')
+    # print(f'{m.gram_schmidt_qr(matrix)[0]}\n')
+    # print(f'{m.givens_qr(matrix)[0]}\n')
+    # print(f'{np.linalg.qr(matrix)[0]}\n')
 
-    print(f'--R--\n{m.householder_qr(matrix)[1]}\n')
-    print(f'{m.gram_schmidt_qr(matrix)[1]}\n')
-    print(f'{m.givens_qr(matrix)[1]}\n')
-    print(f'{np.linalg.qr(matrix)[1]}\n')
-
+    # print(f'--R--\n{m.householder_qr(matrix)[1]}\n')
+    # print(f'{m.gram_schmidt_qr(matrix)[1]}\n')
+    # print(f'{m.givens_qr(matrix)[1]}\n')
+    # print(f'{np.linalg.qr(matrix)[1]}\n')
+    pass
 
 def main():
     first_part()

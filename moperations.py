@@ -87,17 +87,17 @@ def simple_iteration_method(matrix: np.ndarray):
 
     for i in range(c_matrix.shape[0]):
         f_vector[i] = matrix[i, matrix.shape[1] - 1]/matrix[i, i]
-    print(f_vector)
-    print(c_matrix)
-    print(x_vector)
+    # print(f_vector)
+    # print(c_matrix)
+    # print(x_vector)
 
     while True:
         temp_vector = x_vector
         x_vector = mul(c_matrix, x_vector.transpose()) + f_vector
-        print(x_vector)
+        # print(x_vector)
         if abs(find_abs_max(x_vector) - find_abs_max(temp_vector)) < eps:
             break
-    print(x_vector)
+    # print(x_vector)
     return x_vector
 
 
