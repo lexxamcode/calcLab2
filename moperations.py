@@ -123,7 +123,7 @@ def numpy_qr_decomposition(matrix: np.ndarray):
     return np.linalg.qr(matrix)
 
 
-def qr_decomposition(matrix: np.ndarray):
+def gram_schmidt_qr(matrix: np.ndarray):
     # Gram-Schmidt process.
     # Firstly, we need to divide columns
     # of matrix
@@ -252,3 +252,41 @@ def lu_system_solve(matrix: np.ndarray, b: np.ndarray):
         x = tri_solve(u_matrix, y)
         print(f'LU-decomposition:\nL:\n{l_matrix}\nU:\n{u_matrix}\ny:\n{y}')
         return x
+
+
+def householder_qr(matrix: np.array):
+    q_matrix = np.identity(matrix.shape[0])
+    r_matrix = np.copy(matrix)
+    for i in range(matrix.shape[0] - 1):
+        x = r_matrix[i:, i]
+        e = np.zeros_like(x)
+        e[0] = norm(x)
+        u = x - e
+        v = u/norm(u)
+        q_i = np.identity(matrix.shape[0])
+        q_i[i:, i:] -= 2*np.outer(v, v)
+        r_matrix = np.dot(q_i, r_matrix)
+        q_matrix = np.dot(q_matrix, q_i)
+    pair = (q_matrix, r_matrix)
+    return pair
+
+
+def givens_qr(matrix: np.array):
+    n, m = matrix.shape
+    q_matrix = np.identity(n)
+    r_matrix = np.copy(matrix)
+
+    (rows, cols) = np.tril_indices(n, -1, m)
+    for (row, col) in zip(rows, cols):
+        if r_matrix[row, col] != 0:
+            r = np.hypot(r_matrix[col, col], r_matrix[row, col])
+            c = r_matrix[col, col]/r
+            s = -r_matrix[row, col]/r
+            g = np.identity(n)
+            g[[col, row], [col, row]] = c
+            g[row, col] = s
+            g[col, row] = -s
+            r_matrix = np.dot(g, r_matrix)
+            q_matrix = np.dot(q_matrix, g.T)
+    qr = (q_matrix, r_matrix)
+    return qr

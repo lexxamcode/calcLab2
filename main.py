@@ -64,8 +64,8 @@ def second_part():
 
     # Second task
     print('Second task')
-    q_matrix = m.qr_decomposition(matrix)[0]
-    r_matrix = m.qr_decomposition(matrix)[1]
+    q_matrix = m.gram_schmidt_qr(matrix)[0]
+    r_matrix = m.gram_schmidt_qr(matrix)[1]
     print(f'{q_matrix}\n\n{r_matrix}\n\n{m.mul(q_matrix, r_matrix)}\n\n')
     q_matrix = m.numpy_qr_decomposition(matrix)[0]
     r_matrix = m.numpy_qr_decomposition(matrix)[1]
@@ -81,9 +81,24 @@ def second_part():
     print(f'solution of linear algebraic system: {solution}')
 
 
+def third_part():
+    matrix = np.random.randint(-11, 11, (6, 6))
+    print(f'\nThird Part\n{matrix}\n--Q--\n')
+    print(f'{m.householder_qr(matrix)[0]}\n')
+    print(f'{m.gram_schmidt_qr(matrix)[0]}\n')
+    print(f'{m.givens_qr(matrix)[0]}\n')
+    print(f'{np.linalg.qr(matrix)[0]}\n')
+
+    print(f'--R--\n{m.householder_qr(matrix)[1]}\n')
+    print(f'{m.gram_schmidt_qr(matrix)[1]}\n')
+    print(f'{m.givens_qr(matrix)[1]}\n')
+    print(f'{np.linalg.qr(matrix)[1]}\n')
+
+
 def main():
     first_part()
     second_part()
+    third_part()
 
 
 if __name__ == '__main__':
